@@ -15,7 +15,7 @@ def get_trending_news():
     return feed.entries[0] # เอาข่าวล่าสุด 1 ข่าวมาทดสอบ
 
 def summarize_news(title, link):
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     prompt = f"สรุปข่าวหัวข้อ '{title}' จากลิงก์ {link} ให้เป็นโพสต์ Facebook สั้นๆ น่าสนใจ พร้อมใส่ Hashtag"
     response = model.generate_content(prompt)
     return response.text
