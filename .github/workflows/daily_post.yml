@@ -1,1 +1,24 @@
+name: Daily News Post
+on:
+  schedule:
+    - cron: '0 2 * * *' # รันทุก 9 โมงเช้าไทย
+  workflow_dispatch: # ปุ่มสำหรับกดรันเองเพื่อทดสอบ
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+        run: python main.py
 
